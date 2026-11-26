@@ -1,0 +1,43 @@
+package gestionrpg.modelo;
+
+import java.math.BigDecimal;
+
+/**
+ * Datos comunes a todos los personajes. El modelo no sabe nada de bases de datos.
+ */
+public abstract class Personaje {
+
+    private Integer id;          // null hasta que el repositorio lo guarde
+    private String nombre;
+    private int nivel;
+    private int vida;
+    private int ataque;
+    private BigDecimal oro;      // dinero: BigDecimal, nunca double (redondeo)
+
+       protected Personaje(Integer id, String nombre, int nivel, int vida, int ataque, BigDecimal oro) {
+        this.id = id;
+        this.nombre = nombre;
+        this.nivel = nivel;
+        this.vida = vida;
+        this.ataque = ataque;
+        this.oro = oro;
+
+    }
+
+    /** "Guerrero", "Mago" o "Arquero": lo define cada subclase. */
+    public abstract String getClase();
+
+    public Integer getId() { return id; }
+    public void setId(Integer id) { this.id = id; }
+    public String getNombre() { return nombre; }
+    public int getNivel() { return nivel; }
+    public int getVida() { return vida; }
+    public void setVida(int vida) { this.vida = vida; }
+    public int getAtaque() { return ataque; }
+    public BigDecimal getOro() { return oro; }
+
+    @Override
+    public String toString() {
+        return getClase() + "(id=" + id + ", nombre=" + nombre + ", nivel=" + nivel + ", vida=" + vida + ")";
+    }
+}
